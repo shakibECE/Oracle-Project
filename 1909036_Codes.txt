@@ -1,0 +1,105 @@
+drop table participation;
+drop table owner;
+drop table accident;
+drop table car;
+drop table person;
+
+set linesize 60
+set pagesize 15
+
+create table person(
+driver_id varchar(10),
+name varchar(10),
+address varchar(10),
+primary key(driver_id)
+);
+
+insert into person(driver_id,name,address) values(1,'Babur','Dhaka');
+insert into person(driver_id,name,address) values(2,'Humayun','Dhaka');
+insert into person(driver_id,name,address) values(3,'Akbar','Rajshahi');
+insert into person(driver_id,name,address) values(4,'Jahangir','Khulna');
+insert into person(driver_id,name,address) values(5,'Shah Jahan','Sylhet');
+insert into person(driver_id,name,address) values(6,'Aurangzeb','Chittagong');
+insert into person(driver_id,name,address) values(7,'Mumtaz','Comilla');
+
+create table car(
+reg_no varchar(10),
+model varchar(10),
+year number(10),
+primary key(reg_no)
+);
+
+insert into car(reg_no,model,year) values('ka22','hundai',2010);
+insert into car(reg_no,model,year) values('ka23','maruti',2011);
+insert into car(reg_no,model,year) values('ka24','zen',2011);
+insert into car(reg_no,model,year) values('ka25','suzuki',2013);
+insert into car(reg_no,model,year) values('ka26','toyota',2016);
+insert into car(reg_no,model,year) values('ka27','maruti',2018);
+insert into car(reg_no,model,year) values('ka28','toyota',2019);
+
+create table owner(
+driver_id varchar(10) not null,
+reg_no varchar(10),
+foreign key(driver_id) references person(driver_id),
+foreign key(reg_no) references car(reg_no)
+);
+
+insert into owner(driver_id,reg_no) values(1,'ka22');
+insert into owner(driver_id,reg_no) values(2,'ka23');
+insert into owner(driver_id,reg_no) values(3,'ka24');
+insert into owner(driver_id,reg_no) values(4,'ka25');
+insert into owner(driver_id,reg_no) values(5,'ka26');
+insert into owner(driver_id,reg_no) values(6,'ka27');
+insert into owner(driver_id,reg_no) values(7,'ka28');
+
+
+create table accident( 
+report_no number(10),
+reg_date date,
+location varchar(10),
+primary key(report_no)
+);
+
+insert into accident(report_no,reg_date,location) values(11,'01-jan-2020','Dhaka');
+insert into accident(report_no,reg_date,location) values(12,'3-oct-2020','Sylhet');
+insert into accident(report_no,reg_date,location) values(13,'01-feb-2021','Chittagong');
+insert into accident(report_no,reg_date,location) values(14,'05-oct-2021','Khulna');
+
+
+create table participation(
+driver_id varchar(10),
+reg_no varchar(10),
+report_no number(10),
+damage_amount number(10),
+foreign key(driver_id) references person(driver_id),
+foreign key(reg_no) references car(reg_no),
+foreign key(report_no) references accident(report_no)
+);
+
+insert into participation(driver_id,reg_no,report_no,damage_amount) values(1,'ka22',11,5000);
+insert into participation(driver_id,reg_no,report_no,damage_amount) values(2,'ka23',12,15000);
+insert into participation(driver_id,reg_no,report_no,damage_amount) values(5,'ka26',13,7000);
+insert into participation(driver_id,reg_no,report_no,damage_amount) values(7,'ka28',14,23000);
+
+ttitle"**********PERSON**********"
+btitle"***********END************"
+select * from person;
+
+ttitle"***********CAR************"
+btitle"***********END************"
+select * from car; 
+
+ttitle"***********OWNER************"
+btitle"************END*************"
+select * from owner; 
+
+ttitle"*********ACCIDENT*********"
+btitle"***********END************"
+select * from accident;
+
+ttitle"*********PARTICIPATION*********"
+btitle"*************END***************"
+select * from participation;
+
+ttitle off
+btitle off
