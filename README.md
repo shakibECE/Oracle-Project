@@ -1,2 +1,1 @@
-# Oracle-Project
-Auto Insurance Management System 
+This is an Oracle-Project on Auto Insurance Management System 
